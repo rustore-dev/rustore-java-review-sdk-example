@@ -28,6 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/counterTitle"
+        android:text="Нажмите 5 раз, чтобы победить"
         tools:text="Наберите 5, чтобы победить" />
 
     <com.google.android.material.button.MaterialButton

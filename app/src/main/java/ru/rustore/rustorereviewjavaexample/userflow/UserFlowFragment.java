@@ -26,9 +26,6 @@ import ru.rustore.sdk.review.model.ReviewInfo;
 public class UserFlowFragment extends Fragment {
 
     public UserFlowFragment() { super(R.layout.fragment_user_flow); }
-
-    TextView counterTitle;
-
     MaterialButton counterValue;
 
     private RuStoreReviewManager reviewManager;
@@ -46,10 +43,10 @@ public class UserFlowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         reviewManager = RuStoreReviewManagerFactory.INSTANCE.create(requireContext());
 
-        counterTitle = view.findViewById(R.id.counterTitle);
+        requestReviewFlow();
+
         counterValue = view.findViewById(R.id.counterValue);
 
         counterValue.setOnClickListener(v -> {
@@ -60,7 +57,6 @@ public class UserFlowFragment extends Fragment {
 
     private void onButtonClicked() {
         counter++;
-        requestReviewFlow();
         int counterWinCondition = 5;
         if (counter >= counterWinCondition) {
             launchReviewFlow();
