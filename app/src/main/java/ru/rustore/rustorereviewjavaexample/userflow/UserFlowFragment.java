@@ -25,7 +25,6 @@ import ru.rustore.sdk.review.model.ReviewInfo;
 
 public class UserFlowFragment extends Fragment {
 
-    public UserFlowFragment() {  }
     MaterialButton counterValue;
 
     private RuStoreReviewManager reviewManager;
