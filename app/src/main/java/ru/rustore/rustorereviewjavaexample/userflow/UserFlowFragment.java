@@ -25,7 +25,7 @@ import ru.rustore.sdk.review.model.ReviewInfo;
 
 public class UserFlowFragment extends Fragment {
 
-    public UserFlowFragment() { super(R.layout.fragment_user_flow); }
+    public UserFlowFragment() {  }
     MaterialButton counterValue;
 
     private RuStoreReviewManager reviewManager;
@@ -74,7 +74,6 @@ public class UserFlowFragment extends Fragment {
     }
 
     private void launchReviewFlow(){
-        final ReviewInfo reviewInfo = this.reviewInfo;
         if (reviewInfo != null) {
             reviewManager.launchReviewFlow(reviewInfo).addOnCompleteListener(new OnCompleteListener<Unit>() {
                 @Override

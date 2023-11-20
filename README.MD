@@ -14,7 +14,7 @@
 
 Требования для разработчика/приложения:
 
-- Android 6 (SDK 23)
+- Android 6 (SDK 23) или выше
 
 - ApplicationId, указанный в build.gradle, совпадает с applicationId apk-файла, который вы публиковали в консоль RuStore:
 ```
