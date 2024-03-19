@@ -44,5 +44,5 @@ dependencies {
 
 
     //RuStore Review implementation
-    implementation("ru.rustore.sdk:review:1.0.0")
+    implementation("ru.rustore.sdk:review:2.0.0")
 }

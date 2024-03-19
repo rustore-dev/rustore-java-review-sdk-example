@@ -14,7 +14,7 @@
 
 Требования для разработчика/приложения:
 
-- Android 6 (SDK 23) или выше
+- Android 7 или выше
 
 - ApplicationId, указанный в build.gradle, совпадает с applicationId apk-файла, который вы публиковали в консоль RuStore:
 ```
@@ -40,8 +40,6 @@ android {
 ```
 public class UserFlowFragment extends Fragment {
 
-  
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -66,19 +64,10 @@ public class UserFlowFragment extends Fragment {
     }
 
     private void launchReviewFlow(){
-        final ReviewInfo reviewInfo = this.reviewInfo;
         if (reviewInfo != null) {
-            reviewManager.launchReviewFlow(reviewInfo).addOnCompleteListener(new OnCompleteListener<Unit>() {
-                @Override
-                public void onFailure(@NonNull Throwable throwable) {
-                    Log.e("ReviewFlow", "Error" + throwable);
-                }
-
-                @Override
-                public void onSuccess(Unit unit) {
-                    Log.w("ReviewFlow", "Review Flow started");
-                }
-            });
+            reviewManager.launchReviewFlow(reviewInfo)
+                    .addOnSuccessListener(reviewInfo -> Log.w("ReviewFlow", "Review Flow started"))
+                    .addOnFailureListener(throwable -> Log.w("ReviewFlow", "Review Flow error" + throwable));
         }
     }
 }

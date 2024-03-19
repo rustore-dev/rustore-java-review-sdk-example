@@ -5,20 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.button.MaterialButton;
-
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import kotlin.Unit;
 import ru.rustore.rustorereviewjavaexample.R;
-import ru.rustore.sdk.core.tasks.OnCompleteListener;
 import ru.rustore.sdk.review.RuStoreReviewManager;
 import ru.rustore.sdk.review.RuStoreReviewManagerFactory;
 import ru.rustore.sdk.review.model.ReviewInfo;
@@ -48,9 +39,7 @@ public class UserFlowFragment extends Fragment {
 
         counterValue = view.findViewById(R.id.counterValue);
 
-        counterValue.setOnClickListener(v -> {
-            onButtonClicked();
-        });
+        counterValue.setOnClickListener(v -> onButtonClicked());
 
     }
 
@@ -67,24 +56,18 @@ public class UserFlowFragment extends Fragment {
     private void requestReviewFlow() {
         if (reviewInfo != null) return;
 
-        reviewManager.requestReviewFlow().addOnSuccessListener(reviewInfo -> {
-            this.reviewInfo = reviewInfo;
-        });
+        reviewManager.requestReviewFlow().addOnSuccessListener(this::onSuccess);
     }
 
     private void launchReviewFlow(){
         if (reviewInfo != null) {
-            reviewManager.launchReviewFlow(reviewInfo).addOnCompleteListener(new OnCompleteListener<Unit>() {
-                @Override
-                public void onFailure(@NonNull Throwable throwable) {
-                    Log.e("ReviewFlow", "Error" + throwable);
-                }
-
-                @Override
-                public void onSuccess(Unit unit) {
-                    Log.w("ReviewFlow", "Review Flow started");
-                }
-            });
+            reviewManager.launchReviewFlow(reviewInfo)
+                    .addOnSuccessListener(reviewInfo -> Log.w("ReviewFlow", "Review Flow started"))
+                    .addOnFailureListener(throwable -> Log.w("ReviewFlow", "Review Flow error" + throwable));
         }
+    }
+
+    private void onSuccess(ReviewInfo reviewInfo) {
+        this.reviewInfo = reviewInfo;
     }
 }
