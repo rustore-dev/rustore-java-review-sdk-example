@@ -56,18 +56,20 @@ public class UserFlowFragment extends Fragment {
     private void requestReviewFlow() {
         if (reviewInfo != null) return;
 
-        reviewManager.requestReviewFlow().addOnSuccessListener(this::onSuccess);
+        reviewManager.requestReviewFlow()
+                .addOnSuccessListener(reviewInfo -> {
+                    this.reviewInfo = reviewInfo;
+                })
+                .addOnFailureListener(throwable -> {
+                    Log.w("ReviewFlow", throwable.toString());
+                });
     }
 
     private void launchReviewFlow(){
         if (reviewInfo != null) {
             reviewManager.launchReviewFlow(reviewInfo)
                     .addOnSuccessListener(reviewInfo -> Log.w("ReviewFlow", "Review Flow started"))
-                    .addOnFailureListener(throwable -> Log.w("ReviewFlow", "Review Flow error" + throwable));
+                    .addOnFailureListener(throwable -> Log.e("ReviewFlow", "Review Flow error" + throwable));
         }
-    }
-
-    private void onSuccess(ReviewInfo reviewInfo) {
-        this.reviewInfo = reviewInfo;
     }
 }
