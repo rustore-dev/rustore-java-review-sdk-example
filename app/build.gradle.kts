@@ -62,5 +62,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //RuStore Review implementation
+    implementation(platform(libs.rustore.bom))
     implementation(libs.rustore.review)
 }
